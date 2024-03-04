@@ -1,9 +1,9 @@
 # Операции с файлом 
-f = open('test.txt')
+```f = open('test.txt')
 print(type(f))
 date = f.read()
 print(date, type(date))
-f.close()
+f.close()```
 
 # Менеджер контекста
 def is_closed(file_):
