@@ -7,68 +7,18 @@
 # Количество итераций в этом цикле вы получаете из переменной с количеством ингредиентов.
 # Перебирая ингредиенты вы через сплит по символу " | " получаете название ингредиента, количество и единицы измерения.
 # Из этих данных вы формируете словарик, который тут же добавляете в список словарей.
-
+# https://github.com/netology-code/devpy/tree/solution/7.files
 cook_book = {} 
-with open('recipes.txt') as f:   
-    # print(f.readline().strip())
-    # print(f.readline().strip())
-    # print(f.readline().strip())
-    # print(f.readline().strip())
-    # print(f.readline().strip())
-    # print(f.readline().strip())
-    # print(f.readline().strip())
-    for ind,  line  in enumerate(f):
-        line_1 = line.strip()
-        # line_2 = line.strip()
-        if ind ==  2:
-            continue
-        print(line_1)
-    # считываем строку
-    #     line_ = line
-    #     print(line)
-
-    #     line_1 = f.readline().strip()
-    # #     # line_1 = f.readline().strip()
-    # # прерываем цикл, если строка пустая
-    #     # if line == '':
-    #     if line == '':
-    #         break
-    
-    #     print(line, line_1)
-    # lines_1 = f.readlines()[0]  
-    # lines_2 = f.readlines()[1] 
-    # print(lines_2) 
-    # for i, line in enumerate(f):
-    #     print(line)
-
-        
-    #     print(line.split('|'))
-        # if line.strip() == '':
-        #     for line in f:
-        #         pass
-                # print(line.strip())
-        # print(index, line.strip())
-
-
-# with open('recipes.txt') as f:    
-#     for index, line in enumerate(f):
-#         if index == 0:
-#             dish = line
-#         elif index == 1:
-#             ingradients = line
-#         else:
-#             print(line.strip())
-#             # for ingr in line:
-#             #     print(ingr.split(" | "))
-            
-    
-
-    # print(dish, ingradients)
-    
-
-            
-     
-
+with open('recipes.txt', 'r', encoding='utf-8') as f:
+    string_ = f.readline().strip()
+    # print(line)
+    while string_ != '':
+        dish = string_
+        print(dish)
+        count_ingredients = int(f.readline().strip())
+        # print(count_ingredients)
+        f.readline()
+        string_ = f.readline().strip()
         
 
 
