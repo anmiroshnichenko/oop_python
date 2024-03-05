@@ -1,30 +1,79 @@
-cook_book = {} ## Создаем пустой словарь
-with open('recipes.txt') as f: #Читаем файл
-    # lines = f.read().splitlines() # read().splitlines() - чтобы небыло пустых строк
-    # print(lines)   
-    for line in f: # Проходимся по каждой строчке
-        print(line.strip().replace("|", "")) #обрежет строку с обоих концов. Если аргумент не задан удалит пробелы с обоих концов строки
-        # print(line.strip())
-    #     # key, value = line.split(': ') # Разделяем каждую строку по двоеточии(в key будет - пицца, в value - 01)
-    #     key, value = line.split()
-    #     cook_book.update({key:value})	 # Добавляем в словарь
+# Когда вы открыли файл на чтение, вам нужно подумать как в цикле,
+# считывая построчно информацию из файла, последовательно получать данные по каждому блюду,
+# добавлять эти данные в список словарей заданной конфигурации.
+# В цикле вы в первой строке получаете названия блюда и сохраняете в переменную.
+# Во второй строке вы получаете количество ингредиентов, которое тоже сохраняете в переменную.
+# Далее идет еще один вложенный цикл в котором вы уже перебираете ингредиенты.
+# Количество итераций в этом цикле вы получаете из переменной с количеством ингредиентов.
+# Перебирая ингредиенты вы через сплит по символу " | " получаете название ингредиента, количество и единицы измерения.
+# Из этих данных вы формируете словарик, который тут же добавляете в список словарей.
+
+cook_book = {} 
+with open('recipes.txt') as f:   
+    # print(f.readline().strip())
+    # print(f.readline().strip())
+    # print(f.readline().strip())
+    # print(f.readline().strip())
+    # print(f.readline().strip())
+    # print(f.readline().strip())
+    # print(f.readline().strip())
+    for ind,  line  in enumerate(f):
+        line_1 = line.strip()
+        # line_2 = line.strip()
+        if ind ==  2:
+            continue
+        print(line_1)
+    # считываем строку
+    #     line_ = line
+    #     print(line)
+
+    #     line_1 = f.readline().strip()
+    # #     # line_1 = f.readline().strip()
+    # # прерываем цикл, если строка пустая
+    #     # if line == '':
+    #     if line == '':
+    #         break
     
-        # print(line)
-    # lines = f.readlines()
-    # print(lines[0])
-    # for lines in f:
-    #     for  line in lines:
-    #         print(line)
-        # key, value = line.split()
-        # cook_book[key] = value
-print(cook_book) # Вывод словаря на консоль
-	
+    #     print(line, line_1)
+    # lines_1 = f.readlines()[0]  
+    # lines_2 = f.readlines()[1] 
+    # print(lines_2) 
+    # for i, line in enumerate(f):
+    #     print(line)
+
+        
+    #     print(line.split('|'))
+        # if line.strip() == '':
+        #     for line in f:
+        #         pass
+                # print(line.strip())
+        # print(index, line.strip())
+
+
+# with open('recipes.txt') as f:    
+#     for index, line in enumerate(f):
+#         if index == 0:
+#             dish = line
+#         elif index == 1:
+#             ingradients = line
+#         else:
+#             print(line.strip())
+#             # for ingr in line:
+#             #     print(ingr.split(" | "))
+            
+    
+
+    # print(dish, ingradients)
+    
+
+            
+     
+
+        
+
+
+    
 
 
 
 
-# for line in lines: # Проходимся по каждой строчке
-# 	key,value = line.split(': ') # Разделяем каждую строку по двоеточии(в key будет - пицца, в value - 01)
-# 	dic.update({key:value})	 # Добавляем в словарь
-
-  
