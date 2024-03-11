@@ -1,5 +1,25 @@
 # Формат csv
-# import csv  # библиотека для работы с csv
+import csv  # библиотека для работы с csv
+
+# Вариант 1 - Чтение файла построчно(любые файлы)
+# with open('newsafr.csv') as f:
+#     reader = csv.reader(f)
+#     # print(type(reader))
+#     count = 0    
+#     for row in reader:
+#         if count > 0: # избавимся от вывода первой строки "title"
+#             # print(type(row), row)
+#             print(row[-1])
+#         count += 1
+# print(f'В этом файле {count-1} новостей') #  '-1' исключили перую строку "title"
+
+# Вариант 2 - обработка файла целиком (относительно небольшие файла <= 2gb)
+with open('newsafr.csv') as f:
+    reader = csv.reader(f)
+    new_list =  list(reader)
+for row in new_list:
+    print(row[-1])
+
 # with open('newsafr.csv', newline='') as f: #newline=''  - убрать возможные пустые строки 
     # reader = csv.reader(f, delimiter=',') # указали раздилитель ','
     # reader = csv.reader(f, delimiter=',', quoting=csv.QUOTE_NONE, quotechar='"', escapechar='\\') 
@@ -45,7 +65,7 @@ import xml.etree.ElementTree as ET # импорт модуля   для рабо
 # tree = ET.parse('newsafr.xml', parser)
 tree = ET.parse('newsafr.xml')
 root = tree.getroot()
-print(root.tag)
-print(root.text)
-print(root.attrib)
+# print(root.tag)
+# print(root.text)
+# print(root.attrib)
 
