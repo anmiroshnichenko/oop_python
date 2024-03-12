@@ -14,11 +14,47 @@ import csv  # библиотека для работы с csv
 # print(f'В этом файле {count-1} новостей') #  '-1' исключили перую строку "title"
 
 # Вариант 2 - обработка файла целиком (относительно небольшие файла <= 2gb)
+# with open('newsafr.csv') as f:
+#     reader = csv.reader(f)
+#     print(type(reader))
+#     new_list =  list(reader)
+# header = new_list.pop(0)  #убираем первую строку
+# print(header)
+# for row in new_list:
+#     print(row[-1])
+# print(f'В этом файле {len(new_list)} новостей') 
+
+# Вариант 3 - чтение через словари(обратка сложного файла с множеством полей)
+# with open('newsafr.csv') as f:
+#     reader = csv.DictReader(f) #работает только построчно
+#     count = 0
+#     for row in reader:
+#         print(row['title'])
+#         count += 1
+# print(f'В этом файле {count} новостей')
+
+# Записать в csv  файл
 with open('newsafr.csv') as f:
     reader = csv.reader(f)
+    print(type(reader))
     new_list =  list(reader)
-for row in new_list:
-    print(row[-1])
+header = new_list.pop(0)  #убираем первую строку
+print(header)
+
+csv.register_dialect("comma_no_quoting", delimiter=",", quoting=csv.QUOTE_NONE, escapechar='\\')
+csv.register_dialect("semicolon_quoteal", delimiter=";", quoting=csv.QUOTE_ALL)
+# w = write, a = append
+with open('newsafr2.csv', 'w') as f:
+    # writer = csv.writer(f)
+    # writer = csv.writer(f, delimiter=";") # изменили разделитель  
+    # writer = csv.writer(f, delimiter=";", quoting=csv.QUOTE_ALL) # изменили разделитель и добавили кавычки
+    # writer = csv.writer(f, delimiter=",", quoting=csv.QUOTE_NONE, escapechar='\\')  # экранирование запятой "/,"
+    writer = csv.writer(f, dialect="comma_no_quoting")  # используем диалект
+    writer = csv.writer(f, dialect="semicolon_quoteal")
+    writer.writerow(header)
+    writer.writerows(new_list[:3]) 
+
+
 
 # with open('newsafr.csv', newline='') as f: #newline=''  - убрать возможные пустые строки 
     # reader = csv.reader(f, delimiter=',') # указали раздилитель ','
