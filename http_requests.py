@@ -50,14 +50,15 @@ from pprint import pprint
 # pprint(response.headers)
 # answer = response.json() #возвращает словарь и False с большой буквы
 # print(type(answer))
-
 #**************************************************************************************************
+
 # Работаем с NASA & YANDEX DISK
 
 # 1. Получаем информацию о картинке дня
+#**************************************************************************************************
 params = {
     'api_key': 'mLNN5BJ0myCI63JGyKoQ2YQ1A9sdgILh4dFQNDKJ',
-    'date': '2024-03-15'
+    'date': '2024-03-16'
 }
 response =  requests.get('https://api.nasa.gov/planetary/apod', params=params)
 # print(response.status_code)  
@@ -74,10 +75,11 @@ image_name = image_url.split('/')[-1]
 response = requests.get(image_url)
 # print(response.text)
 # print(response.content)
-# with open(image_name, 'wb') as f:
-#     f.write(response.content)
+with open(image_name, 'wb') as f:
+    f.write(response.content)
 
 # 3. Создать папку на диске
+#********************************************************************************************************************
 headers = {
     'Authorization': 'OAuth y0_AgAAAABQ9we7AADLWwAAAAD-VgULAAAuQ9FjfIhGSICsEEn0XHOVnjjVVg'
 }
@@ -98,16 +100,6 @@ print(response.json())
 url_for_upload = response.json()['href']
 with open(image_name, 'rb') as f:
     requests.put(url_for_upload, files={'file': f})
-
-
-
-
-
-
-
-
-
-
 
 
 
