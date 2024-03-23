@@ -57,7 +57,7 @@ from pprint import pprint
 # 1. Получаем информацию о картинке дня
 #**************************************************************************************************
 params = {
-    'api_key': 'mLNN5BJ0myCI63JGyKoQ2YQ1A9sdgILh4dFQNDKJ',
+    'api_key': 'mLNN5BJ0myCI63JGyKYQ1A9sdgILh4dFQNDKJ',
     'date': '2024-03-16'
 }
 response =  requests.get('https://api.nasa.gov/planetary/apod', params=params)
@@ -81,7 +81,7 @@ with open(image_name, 'wb') as f:
 # 3. Создать папку на диске
 #********************************************************************************************************************
 headers = {
-    'Authorization': 'OAuth y0_AgAAAABQ9we7AADLWwAAAAD-VgULAAAuQ9FjfIhGSICsEEn0XHOVnjjVVg'
+    'Authorization': 'OAuth y0_AADLWwAAAAD-VgUL9FjfIhGCsEEn0XHOVnjjVVg'
 }
 response = requests.put('https://cloud-api.yandex.net/v1/disk/resources', params={'path': 'image'}, headers=headers)
 # params = {
