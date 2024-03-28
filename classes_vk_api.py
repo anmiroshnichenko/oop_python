@@ -44,7 +44,7 @@ if __name__ == '__main__':
     vk_client = VKAPIClient(TOKEN, 855721559)
     # print(vk_client.user_id)
     # print(vk_client.get_status())
-    vk_client.replace_status('Hello', 'Hi')
+    # vk_client.replace_status('Hello', 'Hi')
 
 
 
@@ -67,28 +67,78 @@ user_id = 855721559
 vk = VK(access_token, user_id)
 # print(vk.users_info())
 
-# def search_query(q, sorting=0):
-#     # Параметры sort
-#     # 0 - сортировать по умолчанию (аналогичено рузультатам  поиска в полной версии сайта)
-#     # 1 - сортировать по скорости роста;
-#     # 2 - сортировать по отношению дневной посещаемости и количеству пользователей;
-#     # 3 - сортировать по отношению количества лайков к количеству  польователей;
-#     # 4 - сортировать по отношению количества комментариев к количеству пользователей;
-#     # 5 - сортировать по отношению  количества записей в обсуждениях  к количеству пользователей;
-#     params = {
-#         'q': q,
-#         'access_token': TOKEN,
-#         'v': '5.199',
-#         'sort': sorting,
-#         'count': 3
-#     }
-#     req =  requests.get('https://api.vk.com/method/groups.search', params).json()
-#     # pprint(req)
-#     req = req['response']['items']
-#     return req
-# # search_query('python', 0)
+def search_query(q, sorting=0):
+    # Параметры sort
+    # 0 - сортировать по умолчанию (аналогичено рузультатам  поиска в полной версии сайта)
+    # 1 - сортировать по скорости роста;
+    # 2 - сортировать по отношению дневной посещаемости и количеству пользователей;
+    # 3 - сортировать по отношению количества лайков к количеству  польователей;
+    # 4 - сортировать по отношению количества комментариев к количеству пользователей;
+    # 5 - сортировать по отношению  количества записей в обсуждениях  к количеству пользователей;
+    params = {
+        'q': q,
+        'access_token': TOKEN,
+        'v': '5.199',
+        'sort': sorting,
+        'count': 10
+    }
+    req =  requests.get('https://api.vk.com/method/groups.search', params).json()
+    # pprint(req)
+    req = req['response']['items']
+    return req
+# search_query('python', 0)
 
 # pprint(search_query('python', 0))
+# print(len(search_query('python', 0)))
+
+class VkUser:
+    url = 'https://api.vk.com/method/'  # единый для всех запросов базовый url
+    def __init__(self, token, version):
+        self.token = token
+        self.version = version
+        self.params = {
+            'access_token': self.token,
+            'v': self.version
+        }
+        self.owner_id = requests.get(self.url+'users.get', self.params).json()['response'][0]['id']
+
+# Добавим метод для получение подписчиков  при помощи users.getFollowers
+    def get_followers(self, user_id=None):
+        if user_id is None:
+            user_id = self.owner_id
+        followers_url = self.url + 'users.getFollowers'
+        followers_params = {
+            'count': 1000,
+            'user_id': user_id
+        }
+        res = requests.get(followers_url, params={**self.params, **followers_params})
+        return res.json()
+
+# Добавим метод для получение  групп пользователя при помощи groups.get
+    def get_groups(self, user_id=None):
+        if user_id is None:
+            user_id = self.owner_id
+        groups_url = self.url + 'groups.get'
+        groups_porams ={
+            'count': 1000,
+            'user_id': user_id,
+            'fields': 'members_count',  # добавили парамерт  для вывода количества подписчиков
+            'extended': 1  # добавили парамерт  для вывода полной информации о группе
+        }
+        res = requests.get(groups_url, params={**self.params, **groups_porams})
+        return res.json()
+
+
+# узнаем  свой id
+vk_client = VkUser(TOKEN, '5.199')
+# print(vk_client.params)
+print(vk_client.owner_id) 
+pprint(vk_client.get_followers())
+pprint(vk_client.get_groups())
+
+
+
+    
 
 
         
